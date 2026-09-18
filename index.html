@@ -78,7 +78,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Yu Gothic","Hir
 </div>
 
 <div class="wrap">
-  <p class="st">自社で使っているツール（触れます）</p>
+  <p class="st" style="margin-bottom:2px;">自社で使っているツール（触れます）</p>
+  <p style="font-size:14px;color:var(--blue);font-weight:800;margin:0 0 14px;">▶ これらは全部、御社に合わせて作れます・カスタマイズできます。</p>
   <div class="tools2">
     <div class="tool rec">
       <span class="ribbon">★ おすすめ</span>
@@ -87,7 +88,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Yu Gothic","Hir
       <div class="psline s"><span class="tag">解決</span><p>会社を選ぶだけで自動作成。ミスも自動チェック。</p></div>
       <div class="tname">施工体制ナビ<span class="c">施工体制台帳</span></div>
       <a class="btn" href="sekou/" target="_blank">▶ デモを触ってみる</a>
-      <div class="tut">チュートリアル付き</div>
+      <div class="tut">チュートリアル付き ・ <b style="color:var(--blue)">御社用に作れます</b></div>
     </div>
     <div class="tool">
       <div class="thook">🙋 “誰がどの現場か”、頭の中とExcel頼みになっていませんか？</div>
@@ -95,7 +96,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Yu Gothic","Hir
       <div class="psline s"><span class="tag">解決</span><p>クラウドで見える化・共有。工期連動で進捗も自動、台帳と連動。</p></div>
       <div class="tname">人員配置表<span class="c">人員・労務</span></div>
       <a class="btn" href="jinin/" target="_blank">▶ デモを触ってみる</a>
-      <div class="tut">チュートリアル付き</div>
+      <div class="tut">チュートリアル付き ・ <b style="color:var(--blue)">御社用に作れます</b></div>
     </div>
   </div>
 
@@ -107,8 +108,13 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Yu Gothic","Hir
   <div id="list"></div>
 
   <div class="foot" id="cta">
-    <h2>「こういう問題、ありませんか？」</h2>
-    <p>その場で解決しなくてOK。御社の“面倒”を聞かせてください。</p>
+    <h2>御社に合わせたツール、作れます。</h2>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:0 0 14px;">
+      <span class="pill">✔ 現場の声を反映</span>
+      <span class="pill">✔ 御社用にカスタマイズ</span>
+      <span class="pill">✔ どんな“面倒”も改善</span>
+    </div>
+    <p style="font-size:16px;font-weight:800;color:#fff;margin:0 0 14px;">まずは一度、ご相談ください。</p>
     <span class="pill">✉ mb-dx@marubeni-co.jp</span>
     <span class="pill">🏢 どぼフェス ブースにて</span>
   </div>
@@ -118,13 +124,13 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Yu Gothic","Hir
 <script>
 const MAKE=[
  // 自社で内製・運用中（実績）
- {name:"工事情報更新システム",cat:"施工管理",ico:"🏗️",real:true},
- {name:"建退共（年次）",cat:"人員・労務",ico:"🏦",real:true},
+ {name:"工事情報更新システム",cat:"施工管理",ico:"🏗️",real:true,url:"koji/"},
+ {name:"建退共（年次）",cat:"人員・労務",ico:"🏦",real:true,url:"kentaikyo/"},
  {name:"スマホ集計",cat:"経理",ico:"📱",real:true},
  {name:"交際費集計",cat:"経理",ico:"🧾",real:true},
  {name:"入金確認",cat:"経理",ico:"💴",real:true},
- {name:"取引先管理",cat:"その他",ico:"🤝",real:true},
- {name:"タスク管理（個人）",cat:"その他",ico:"✅",real:true},
+ {name:"取引先管理",cat:"その他",ico:"🤝",real:true,url:"torihiki/"},
+ {name:"タスク管理（個人）",cat:"その他",ico:"✅",real:true,url:"task/"},
  // 御社に合わせて作れる例
  {name:"日報・工事写真",cat:"施工管理",ico:"📋"},
  {name:"進捗・工程の見える化",cat:"施工管理",ico:"📊"},
@@ -145,10 +151,10 @@ function render(){
   const s=MAKE.filter(t=>(cat==="すべて"||t.cat===cat)&&(!q||(t.name+t.cat).toLowerCase().includes(q.toLowerCase())));
   if(!s.length){list.innerHTML='<p class="empty">該当なし。まずはご相談ください。</p>';return;}
   list.innerHTML='<div class="grid">'+s.map(t=>{
-    const st=t.real?'<span style="color:var(--sol);font-weight:800">✔ 自社で運用中</span>':'<span style="color:var(--lav);font-weight:800">🛠 開発できます</span>';
-    return '<div class="cell"><div class="cico">'+t.ico+'</div><div><p class="cn">'+t.name+'</p><p class="cc">'+t.cat+' ・ '+st+'</p></div></div>';
+    const st=t.real?('<span style="color:var(--sol);font-weight:800">✔ 自社で運用中</span>'+(t.url?' <span style="color:var(--blue);font-weight:800">▶ 触れる</span>':'')+' <span style="color:var(--blue);font-weight:800">・御社にも作れます</span>'):'<span style="color:var(--lav);font-weight:800">🛠 御社に作れます</span>';
+    return '<div class="cell" data-url="'+(t.url||'')+'"><div class="cico">'+t.ico+'</div><div><p class="cn">'+t.name+'</p><p class="cc">'+t.cat+' ・ '+st+'</p></div></div>';
   }).join("")+'</div>';
-  list.querySelectorAll(".cell").forEach(c=>c.onclick=()=>document.getElementById("cta").scrollIntoView({behavior:"smooth"}));
+  list.querySelectorAll(".cell").forEach(c=>c.onclick=()=>{ if(c.dataset.url){window.open(c.dataset.url,"_blank");} else {document.getElementById("cta").scrollIntoView({behavior:"smooth"});} });
 }
 render();
 </script>
