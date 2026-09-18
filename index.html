@@ -77,6 +77,14 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Yu Gothic","Hir
   <p>自分たちが困って作り、実際に使っているツールです。触ってみてください。</p>
 </div>
 
+<div style="background:var(--card);border-bottom:1px solid var(--line);">
+  <div class="wrap" style="padding:16px 22px;display:flex;gap:26px;justify-content:center;flex-wrap:wrap;text-align:center;">
+    <div><div style="font-size:28px;font-weight:900;color:var(--blue);line-height:1;">9<span style="font-size:14px;">ツール</span></div><div style="font-size:12px;color:var(--sub);margin-top:4px;">自社で内製・運用中</div></div>
+    <div><div style="font-size:28px;font-weight:900;color:var(--blue);line-height:1;">3時間→30分</div><div style="font-size:12px;color:var(--sub);margin-top:4px;">施工体制台帳の作成（自社実績）</div></div>
+    <div><div style="font-size:28px;font-weight:900;color:var(--blue);line-height:1;">100%</div><div style="font-size:12px;color:var(--sub);margin-top:4px;">御社に合わせてカスタマイズ</div></div>
+  </div>
+</div>
+
 <div class="wrap">
   <p class="st" style="margin-bottom:2px;">自社で使っているツール（触れます）</p>
   <p style="font-size:14px;color:var(--blue);font-weight:800;margin:0 0 14px;">▶ これらは全部、御社に合わせて作れます・カスタマイズできます。</p>
@@ -151,7 +159,7 @@ function render(){
   const s=MAKE.filter(t=>(cat==="すべて"||t.cat===cat)&&(!q||(t.name+t.cat).toLowerCase().includes(q.toLowerCase())));
   if(!s.length){list.innerHTML='<p class="empty">該当なし。まずはご相談ください。</p>';return;}
   list.innerHTML='<div class="grid">'+s.map(t=>{
-    const st=t.real?('<span style="color:var(--sol);font-weight:800">✔ 自社で運用中</span>'+(t.url?' <span style="color:var(--blue);font-weight:800">▶ 触れる</span>':'')+' <span style="color:var(--blue);font-weight:800">・御社にも作れます</span>'):'<span style="color:var(--lav);font-weight:800">🛠 御社に作れます</span>';
+    const st=t.real?('<span style="color:var(--sol);font-weight:800">✔ 自社で運用中</span>'+(t.url?' <span style="color:var(--blue);font-weight:800">▶ 触れる</span>':'')):'<span style="color:var(--lav);font-weight:800">🛠 御社に作れます</span>';
     return '<div class="cell" data-url="'+(t.url||'')+'"><div class="cico">'+t.ico+'</div><div><p class="cn">'+t.name+'</p><p class="cc">'+t.cat+' ・ '+st+'</p></div></div>';
   }).join("")+'</div>';
   list.querySelectorAll(".cell").forEach(c=>c.onclick=()=>{ if(c.dataset.url){window.open(c.dataset.url,"_blank");} else {document.getElementById("cta").scrollIntoView({behavior:"smooth"});} });
