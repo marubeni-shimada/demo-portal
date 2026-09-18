@@ -99,7 +99,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Yu Gothic","Hir
     </div>
   </div>
 
-  <p class="st">ほかにも、こんなものが作れます</p>
+  <p class="st">自社で内製したツール（実績）＋ 御社に作れるもの</p>
   <div class="controls">
     <div class="search"><span class="mag">🔍</span><input id="q" placeholder="キーワードで探す"></div>
     <div class="chips" id="chips"></div>
@@ -117,13 +117,20 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Yu Gothic","Hir
 
 <script>
 const MAKE=[
+ // 自社で内製・運用中（実績）
+ {name:"工事情報更新システム",cat:"施工管理",ico:"🏗️",real:true},
+ {name:"建退共（年次）",cat:"人員・労務",ico:"🏦",real:true},
+ {name:"スマホ集計",cat:"経理",ico:"📱",real:true},
+ {name:"交際費集計",cat:"経理",ico:"🧾",real:true},
+ {name:"入金確認",cat:"経理",ico:"💴",real:true},
+ {name:"取引先管理",cat:"その他",ico:"🤝",real:true},
+ {name:"タスク管理（個人）",cat:"その他",ico:"✅",real:true},
+ // 御社に合わせて作れる例
  {name:"日報・工事写真",cat:"施工管理",ico:"📋"},
  {name:"進捗・工程の見える化",cat:"施工管理",ico:"📊"},
- {name:"台帳・名簿のデジタル化",cat:"施工管理",ico:"🗂️"},
  {name:"出面・勤怠の集計",cat:"人員・労務",ico:"🕐"},
  {name:"原価・見積管理",cat:"経理",ico:"💰"},
  {name:"各種帳票の自動作成",cat:"経理",ico:"📄"},
- {name:"入金・請求の管理",cat:"経理",ico:"🧾"},
  {name:"安全書類・KY・点検表",cat:"安全",ico:"🦺"},
  {name:"今のExcelをシステムに",cat:"その他",ico:"🛠️"},
 ];
@@ -137,8 +144,10 @@ function render(){
   const list=document.getElementById("list");
   const s=MAKE.filter(t=>(cat==="すべて"||t.cat===cat)&&(!q||(t.name+t.cat).toLowerCase().includes(q.toLowerCase())));
   if(!s.length){list.innerHTML='<p class="empty">該当なし。まずはご相談ください。</p>';return;}
-  list.innerHTML='<div class="grid">'+s.map(t=>
-    '<div class="cell"><div class="cico">'+t.ico+'</div><div><p class="cn">'+t.name+'</p><p class="cc">'+t.cat+' ・ 開発できます</p></div></div>').join("")+'</div>';
+  list.innerHTML='<div class="grid">'+s.map(t=>{
+    const st=t.real?'<span style="color:var(--sol);font-weight:800">✔ 自社で運用中</span>':'<span style="color:var(--lav);font-weight:800">🛠 開発できます</span>';
+    return '<div class="cell"><div class="cico">'+t.ico+'</div><div><p class="cn">'+t.name+'</p><p class="cc">'+t.cat+' ・ '+st+'</p></div></div>';
+  }).join("")+'</div>';
   list.querySelectorAll(".cell").forEach(c=>c.onclick=()=>document.getElementById("cta").scrollIntoView({behavior:"smooth"}));
 }
 render();
